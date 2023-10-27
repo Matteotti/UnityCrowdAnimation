@@ -11,12 +11,13 @@ public class FishMove : MonoBehaviour
 {
     public float farestDistance;
     public float maxNeighborDistance;
+    public float maxSharkDistance;
     public float maxAvoidDistance;
     public float separationFactor;
     public float alignmentFactor;
     public float cohesionFactor;
     public float centeringFactor;
-    public float flockFactor;
+    public float sharkFactor;
     public float speed;
     public float rotateSpeed;
     public GameObject centerGameObject;
@@ -28,12 +29,13 @@ public class FishMove : MonoBehaviour
         initializer = Resources.Load<Initializer>("Initializer");
         farestDistance = initializer.farestDistance;
         maxNeighborDistance = initializer.maxNeighborDistance;
+        maxSharkDistance = initializer.maxSharkDistance;
         maxAvoidDistance = initializer.maxAvoidDistance;
         separationFactor = initializer.separationFactor;
         alignmentFactor = initializer.alignmentFactor;
         cohesionFactor = initializer.cohesionFactor;
         centeringFactor = initializer.centeringFactor;
-        flockFactor = initializer.flockFactor;
+        sharkFactor = initializer.sharkFactor;
         speed = initializer.speed;
         rotateSpeed = initializer.rotateSpeed;
         centerGameObject = GameObject.Find("Center");
@@ -96,6 +98,20 @@ public class FishMove : MonoBehaviour
         if (centerDistance > farestDistance)
         {
             ruleVector += centerDirection * centeringFactor;
+        }
+        Vector3 sharkDistancing = Vector3.zero;
+        for (int i = 0; i < FishGlobal.Instance.globalSharks.Count; i++)
+        {
+            float distance = Vector3.Distance(transform.position, FishGlobal.Instance.globalSharks[i].transform.position);
+            if (distance < maxSharkDistance)
+            {
+                sharkDistancing += (transform.position - FishGlobal.Instance.globalSharks[i].transform.position) / distance;
+            }
+        }
+        if (sharkDistancing != Vector3.zero)
+        {
+            sharkDistancing.Normalize();
+            ruleVector += sharkDistancing * sharkFactor;
         }
         ruleVector.Normalize();
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(ruleVector), Time.deltaTime * rotateSpeed);
