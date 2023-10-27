@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be422116a0dd4904a8c9ce71b9da80b7, type: 3}
+  m_Name: Initializer
+  m_EditorClassIdentifier: 
+  farestDistance: 0
+  maxNeighborDistance: 5
+  maxAvoidDistance: 0.5
+  separationFactor: 1
+  alignmentFactor: 2
+  cohesionFactor: 0.2
+  centeringFactor: 1
+  flockFactor: 0.5
+  speed: 3
+  rotateSpeed: 1
