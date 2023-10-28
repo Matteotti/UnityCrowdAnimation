@@ -26,7 +26,8 @@ public class SharkMove : MonoBehaviour
         {
             targetDirection = center.transform.position - transform.position;
         }
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(targetDirection), rotateSpeed * Time.deltaTime);
+        if (targetDirection != transform.forward)
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(targetDirection), rotateSpeed * Time.deltaTime);
         rb.velocity = transform.forward * speed;
     }
 

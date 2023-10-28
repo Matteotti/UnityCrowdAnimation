@@ -6,15 +6,16 @@ TagManager:
   tags:
   - Fish
   - Obstacle
+  - Panel
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Fish
   - Water
   - UI
-  - 
-  - 
+  - Obstacle
+  - Shark
   - 
   - 
   - 

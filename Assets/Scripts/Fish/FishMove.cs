@@ -9,15 +9,18 @@ using UnityEditor;
 
 public class FishMove : MonoBehaviour
 {
+    public string patternName;
     public float farestDistance;
     public float maxNeighborDistance;
     public float maxSharkDistance;
     public float maxAvoidDistance;
+    public float maxObstacleDistance;
     public float separationFactor;
     public float alignmentFactor;
     public float cohesionFactor;
     public float centeringFactor;
     public float sharkFactor;
+    public float obstacleFactor;
     public float speed;
     public float rotateSpeed;
     public GameObject centerGameObject;
@@ -26,18 +29,8 @@ public class FishMove : MonoBehaviour
     private Rigidbody rb;
     void Start()
     {
-        initializer = Resources.Load<Initializer>("Initializer");
-        farestDistance = initializer.farestDistance;
-        maxNeighborDistance = initializer.maxNeighborDistance;
-        maxSharkDistance = initializer.maxSharkDistance;
-        maxAvoidDistance = initializer.maxAvoidDistance;
-        separationFactor = initializer.separationFactor;
-        alignmentFactor = initializer.alignmentFactor;
-        cohesionFactor = initializer.cohesionFactor;
-        centeringFactor = initializer.centeringFactor;
-        sharkFactor = initializer.sharkFactor;
-        speed = initializer.speed;
-        rotateSpeed = initializer.rotateSpeed;
+        initializer = Resources.Load<Initializer>(patternName);
+        Initialize();
         centerGameObject = GameObject.Find("Center");
         currentDirection = transform.forward;
         rb = GetComponent<Rigidbody>();
@@ -60,7 +53,6 @@ public class FishMove : MonoBehaviour
     void Update()
     {
         FlockRule();
-        ZoneControl();
     }
 
     void FlockRule()
@@ -113,13 +105,40 @@ public class FishMove : MonoBehaviour
             sharkDistancing.Normalize();
             ruleVector += sharkDistancing * sharkFactor;
         }
+        Vector3 obstacleDistancing = Vector3.zero;
+        for (int i = 0; i < FishGlobal.Instance.globalObstacles.Count; i++)
+        {
+            float distance = Vector3.Distance(transform.position, FishGlobal.Instance.globalObstacles[i].transform.position);
+            if (distance < maxObstacleDistance)
+            {
+                obstacleDistancing += (transform.position - FishGlobal.Instance.globalObstacles[i].transform.position) / distance;
+            }
+        }
+        if (obstacleDistancing != Vector3.zero)
+        {
+            obstacleDistancing.Normalize();
+            ruleVector += obstacleDistancing * obstacleFactor;
+        }
         ruleVector.Normalize();
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(ruleVector), Time.deltaTime * rotateSpeed);
         rb.velocity = transform.forward * speed;
         currentDirection = ruleVector;
     }
 
-    void ZoneControl()
+    void Initialize()
     {
+        farestDistance = initializer.farestDistance;
+        maxNeighborDistance = initializer.maxNeighborDistance;
+        maxSharkDistance = initializer.maxSharkDistance;
+        maxAvoidDistance = initializer.maxAvoidDistance;
+        maxObstacleDistance = initializer.maxObstacleDistance;
+        separationFactor = initializer.separationFactor;
+        alignmentFactor = initializer.alignmentFactor;
+        cohesionFactor = initializer.cohesionFactor;
+        centeringFactor = initializer.centeringFactor;
+        sharkFactor = initializer.sharkFactor;
+        obstacleFactor = initializer.obstacleFactor;
+        speed = initializer.speed;
+        rotateSpeed = initializer.rotateSpeed;
     }
 }

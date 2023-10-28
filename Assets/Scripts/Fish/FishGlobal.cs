@@ -10,6 +10,7 @@ public class FishGlobal : MonoBehaviour
     public static FishGlobal Instance;
     public List<GameObject> globalFishes = new List<GameObject>();
     public List<GameObject> globalSharks = new List<GameObject>();
+    public List<GameObject> globalObstacles = new List<GameObject>();
     void Awake()
     {
         if (Instance == null)

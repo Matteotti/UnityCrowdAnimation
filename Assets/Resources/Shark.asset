@@ -10,15 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: be422116a0dd4904a8c9ce71b9da80b7, type: 3}
-  m_Name: "\u5BC6\u96C6\u7D27\u51D1"
+  m_Name: Shark
   m_EditorClassIdentifier: 
   farestDistance: 0
   maxNeighborDistance: 5
+  maxSharkDistance: 4
   maxAvoidDistance: 1
+  maxObstacleDistance: 0
   separationFactor: 2
   alignmentFactor: 1
   cohesionFactor: 0.2
   centeringFactor: 1
-  flockFactor: 0.5
+  sharkFactor: 10
+  obstacleFactor: 0
   speed: 3
   rotateSpeed: 1

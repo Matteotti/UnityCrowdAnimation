@@ -14,12 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   farestDistance: 0
   maxNeighborDistance: 5
-  maxSharkDistance: 5
   maxAvoidDistance: 1
   separationFactor: 2
   alignmentFactor: 1
   cohesionFactor: 0.2
   centeringFactor: 1
-  sharkFactor: 10
+  flockFactor: 0.5
   speed: 3
   rotateSpeed: 1

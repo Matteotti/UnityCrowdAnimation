@@ -6,6 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Fish.unity
+    path: Assets/Scenes/Free.unity
+    guid: dde67beb3365e634a905dc03cecafb84
+  - enabled: 1
+    path: Assets/Scenes/Dense.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/Sparse.unity
+    guid: 0f7fe9d0fde3efd43b79b92065e9a1f8
+  - enabled: 1
+    path: Assets/Scenes/Shark.unity
+    guid: 8d02bc4094c9f674eacaa2bc72ee2425
+  - enabled: 1
+    path: Assets/Scenes/Obstacle.unity
+    guid: d9ed78d8588002e4b801b4e1c5e647b6
   m_configObjects: {}
